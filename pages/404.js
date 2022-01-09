@@ -1,6 +1,6 @@
-import Link from "next/link";
+import Link from "next/link"
 
-const MyCustom404Page = (props) => {
+const MyCustom404Page = () => {
   return (
     <div
       style={{
@@ -21,7 +21,7 @@ const MyCustom404Page = (props) => {
       </h2>
       <p>Désolé page introuvable</p>
     </div>
-  );
-};
+  )
+}
 
-export default MyCustom404Page;
+export default MyCustom404Page

@@ -1,5 +1,5 @@
-import { Field } from "formik";
-import Input from "./Input";
+import { Field } from "formik"
+import Input from "./Input"
 
 const FormField = (props) => {
   const {
@@ -8,7 +8,7 @@ const FormField = (props) => {
     helper: Helper,
     as: Component = Input,
     ...otherProps
-  } = props;
+  } = props
 
   return (
     <Field {...otherProps}>
@@ -25,7 +25,7 @@ const FormField = (props) => {
         </div>
       )}
     </Field>
-  );
-};
+  )
+}
 
-export default FormField;
+export default FormField
