@@ -1,50 +1,69 @@
-import "../../styles/add-entry.module.css";
-import Button from "../../components/Button";
-import { useCallback } from "react";
-import FormField from "../../components/FormField";
-import { Formik } from "formik";
-import * as yup from "yup";
-import { useState } from "react";
+import "../../styles/add-entry.module.css"
+import Button from "../../components/Button"
+import { useCallback } from "react"
+import FormField from "../../components/FormField"
+import { Formik } from "formik"
+import * as yup from "yup"
+import Link from "next/link"
 
 const validationSchema = yup.object().shape({
   amount: yup.number().required(),
   description: yup.string().required("Description obligatoire"),
-});
+})
 
 const initialValues = {
   amount: "",
   description: "",
-};
+}
 
 const AddEntry = () => {
   const handleFormSubmit = useCallback(
-    async (values, { setErrors, setFieldError }) => {
+    async (values, { setFieldError, setFieldValue }) => {
       if (values.amount === 0) {
-        setFieldError("amount", "tout sauf 0");
-        return false;
+        setFieldError("amount", "tout sauf 0")
+
+        return false
       }
-      let existingEntries = JSON.parse(localStorage.getItem("allEntries"));
+
+      let existingEntries = JSON.parse(localStorage.getItem("allEntries"))
+
       if (existingEntries == null) {
-        existingEntries = [];
+        existingEntries = []
       }
+
       let formValue = {
         amount: values.amount,
         description: values.description,
-      };
-      existingEntries.push(formValue);
-      localStorage.setItem("allEntries", JSON.stringify(existingEntries));
-      return true;
+      }
+
+      if (values.amount > 0) {
+        formValue.from = true
+      } else {
+        formValue.form = false
+      }
+
+      existingEntries.push(formValue)
+      localStorage.setItem("allEntries", JSON.stringify(existingEntries))
+
+      setFieldValue("amount", "")
+      setFieldValue("description", "")
+
+      return true
     },
     []
-  );
+  )
+
   return (
-    <Formik
-      onSubmit={handleFormSubmit}
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-    >
-      {({ handleSubmit, isValid, isSubmitting, errors }) =>
-        console.log(errors) || (
+    <>
+      <Link href="/dashboard">
+        <a>Dashboard!</a>
+      </Link>
+      <Formik
+        onSubmit={handleFormSubmit}
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+      >
+        {({ handleSubmit, isValid, isSubmitting }) => (
           <form
             onSubmit={handleSubmit}
             noValidate
@@ -60,10 +79,10 @@ const AddEntry = () => {
               SUBMIT
             </Button>
           </form>
-        )
-      }
-    </Formik>
-  );
-};
+        )}
+      </Formik>
+    </>
+  )
+}
 
-export default AddEntry;
+export default AddEntry

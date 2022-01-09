@@ -1,7 +1,7 @@
-import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
-import styles from "../styles/Home.module.css";
+import Head from "next/head"
+import Image from "next/image"
+import Link from "next/link"
+import styles from "../styles/Home.module.css"
 
 export default function Home() {
   return (
@@ -21,7 +21,7 @@ export default function Home() {
       <main className={styles.main}>
         <h1 className={styles.title}>
           Bienvenue,{" "}
-          <Link href="/dashbord">
+          <Link href="/dashboard">
             <a>cliqué pour accéder à la comptabilité !</a>
           </Link>
         </h1>
@@ -60,5 +60,5 @@ export default function Home() {
         </a>
       </footer>
     </div>
-  );
+  )
 }
