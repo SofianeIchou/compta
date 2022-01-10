@@ -5,6 +5,7 @@ import FormField from "../../components/FormField"
 import { Formik } from "formik"
 import * as yup from "yup"
 import Link from "next/link"
+import { SwitchThemeButton } from "../../components/SwitchButton"
 
 const validationSchema = yup.object().shape({
   amount: yup.number().required(),
@@ -81,6 +82,7 @@ const AddEntry = () => {
           </form>
         )}
       </Formik>
+      <SwitchThemeButton />
     </>
   )
 }

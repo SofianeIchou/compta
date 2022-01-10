@@ -1,9 +1,11 @@
 import classNames from "classnames"
+import { useContext } from "react"
+import ThemeContext from "./ThemeContext"
 
 const className = "font-bold"
 const variants = {
-  primary: "bg-blue-600 dark:bg-pink-600 text-white disabled:bg-blue-300",
-  secondary: "border-2 border-blue-600 text-blue-600",
+  primary: (theme) => `bg-${theme.colors.primary}`,
+  secondary: (theme) => `text-${theme.colors.primary}`,
 }
 const sizes = {
   sm: "py-1 px-1.5 text-xs",
@@ -13,11 +15,12 @@ const sizes = {
 
 const Button = (props) => {
   const { variant = "primary", size = "md", ...otherProps } = props
+  const { theme } = useContext(ThemeContext)
 
   return (
     <button
       {...otherProps}
-      className={classNames(className, variants[variant], sizes[size])}
+      className={classNames(className, variants[variant](theme), sizes[size])}
     />
   )
 }
